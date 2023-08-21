@@ -7,4 +7,6 @@ public interface IAUthServise
 {
     Task RegisterUser(SignUp signUp);
     Task<Client?> Login(SignUp user);
+    
+    
 }

@@ -7,5 +7,6 @@ public class UserDataServise : DataServiceBase<User>
 {
     public UserDataServise(DbContext dbContext) : base(dbContext)
     {
+        
     }
 }
