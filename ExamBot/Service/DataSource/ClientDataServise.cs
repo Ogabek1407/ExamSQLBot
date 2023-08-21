@@ -9,4 +9,5 @@ public class ClientDataServise : DataServiceBase<Client>
     {
         
     }
+    
 }
