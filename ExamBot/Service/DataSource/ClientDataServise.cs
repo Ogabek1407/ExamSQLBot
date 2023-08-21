@@ -7,5 +7,6 @@ public class ClientDataServise : DataServiceBase<Client>
 {
     public ClientDataServise(DbContext dbContext) : base(dbContext)
     {
+        
     }
 }
