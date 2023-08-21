@@ -18,7 +18,7 @@ public class ControllerManager
         ExamService examService
         )
     {
-        _authController = new AuthController(this);
+        _authController = new AuthController(this,authServise);
         _homeController = new HomeController(this);
         _clientController = new ClientController(this);
         _examController = new ExamController(this);
