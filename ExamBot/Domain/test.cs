@@ -1,6 +1,6 @@
 namespace ExamBot.Domain;
 
-public class User
+public class test
 {
     
 }
