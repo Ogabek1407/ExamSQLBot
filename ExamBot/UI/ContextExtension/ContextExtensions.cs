@@ -39,8 +39,24 @@ public static class ContextExtensions
     public static async Task SendTextMessage(this Context context, string text, IReplyMarkup? replyMarkup = null,
         ParseMode? parseMode = null)
     {
-        //await Telegram..SendTextMessageAsync(context.Session.TelegramChatId, text, replyMarkup: replyMarkup,
-          //  parseMode: parseMode);
+        await TelegramBot._client.SendTextMessageAsync(context.Session.TelegramChatId, text, replyMarkup: replyMarkup,
+            parseMode: parseMode);
+    }
+    
+    
+    
+    public static long? GetChatIdFromUpdate(this Context context)
+    {
+        var update = context.Update;
+        return update.Type switch
+        {
+            UpdateType.Message => update.Message?.Chat.Id,
+            UpdateType.CallbackQuery => update.CallbackQuery?.From.Id,
+            UpdateType.EditedMessage => update.EditedMessage?.Chat.Id,
+            UpdateType.InlineQuery => update.InlineQuery?.From.Id,
+            UpdateType.ChosenInlineResult => update.ChosenInlineResult?.From.Id,
+            _ => null
+        };
     }
 }
 

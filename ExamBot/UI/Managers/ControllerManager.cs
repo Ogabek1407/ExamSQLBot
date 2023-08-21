@@ -1,4 +1,6 @@
 using ExamBot.Domain.EntityView;
+using ExamBot.Service;
+using ExamBot.Service.DataSource;
 using ExamBot.UI.Controllers;
 
 namespace ExamBot.UI.Managers;
@@ -11,7 +13,10 @@ public class ControllerManager
     private readonly ExamController _examController;
     private readonly ExaminerController _examinerController;
 
-    public ControllerManager()
+    public ControllerManager(
+        AuthServise authServise,
+        ExamService examService
+        )
     {
         _authController = new AuthController(this);
         _homeController = new HomeController(this);

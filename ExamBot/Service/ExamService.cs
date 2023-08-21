@@ -6,17 +6,19 @@ namespace ExamBot.Service;
 
 public class ExamService : IExamService
 {
-    private readonly ExamDataService _examDataService;
+    public readonly ExamDataService _examDataService;
+    public readonly ExamResultDataService _examResultDataService;
 
-    public ExamService(ExamDataService examDataService)
+    public ExamService(ExamDataService examDataService,ExamResultDataService examResultDataService)
     {
         _examDataService = examDataService;
+        _examResultDataService = examResultDataService;
     }
 
 
     public async Task ExamTime()
     {
-        foreach (var exams in _examDataService.GetAll().Result)
+        foreach (var exams in _examDataService.GetAll())
         {
             if (exams.Time > DateTime.Now)
                 exams.Status = ExamStatus.NoStarted;

@@ -6,6 +6,6 @@ namespace ExamBot.UI;
 public class Context:ContextBase
 {
 
-    public List<Task> TerminateSession { get; set; }
+    public Func<Task> TerminateSession { get; set; }
     public Session Session { get; set; }
 }
