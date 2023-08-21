@@ -1,9 +1,13 @@
+using System.Runtime.InteropServices.JavaScript;
+using ExamBot.Domain.Entity;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Npgsql.Internal.TypeHandlers.DateTimeHandlers;
 
 namespace ExamBot.Service.DataSource;
 
-public abstract class DataServiceBase<T>:IServiceBase<T>
+public  class DataServiceBase<T>:IServiceBase<T> where T : ModelBase
 {
     private readonly DbContext _dbContext;
 
@@ -12,28 +16,49 @@ public abstract class DataServiceBase<T>:IServiceBase<T>
         _dbContext = dbContext;
     }
 
-    public Task<T> Create(T data)
+    public async Task<T> Create(T data)
     {
-        throw new NotImplementedException();
+        var entityEntry = await this._dbContext
+            .Set<T>()
+            .AddAsync(entity:data);
+
+        await this._dbContext.SaveChangesAsync();
+
+        return entityEntry.Entity;
     }
 
-    public Task<T> Update(T data)
+    public async Task<T> Update(T data)
     {
-        throw new NotImplementedException();
+        var entityEntry = this._dbContext
+            .Set<T>()
+            .Update(entity:data);
+
+        await this._dbContext.SaveChangesAsync();
+
+        return entityEntry.Entity;
     }
 
-    public Task<T> Delete(long Id)
+    public async Task<T> Delete(long Id)
     {
-        throw new NotImplementedException();
+        var entityEntry = this._dbContext
+            .Set<T>()
+            .FirstOrDefault(x => x.Id == Id);
+
+        if(entityEntry is not null)
+            _dbContext.Remove(entityEntry);
+
+        await this._dbContext.SaveChangesAsync();
+
+        return entityEntry;
     }
 
-    public Task<T> FindById(long Id)
+    public async Task<T?> FindById(long Id)
     {
-        throw new NotImplementedException();
+        return await this.GetAll().FirstOrDefaultAsync(x => x.Id == Id);
     }
 
-    public Task<IQueryable<T>> GetAll()
+    public  IQueryable<T> GetAll()
     {
-        throw new NotImplementedException();
+        return  this._dbContext.Set<T>();
     }
 }
