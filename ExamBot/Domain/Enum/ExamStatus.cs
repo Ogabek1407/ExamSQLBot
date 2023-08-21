@@ -2,5 +2,7 @@ namespace ExamBot.Domain.Enum;
 
 public enum ExamStatus
 {
-    Started,NoStarted,Finished
+    Started,
+    NoStarted,
+    Finished
 }
