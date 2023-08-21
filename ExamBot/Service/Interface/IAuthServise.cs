@@ -7,7 +7,7 @@ namespace Interfaces;
 
 public interface IAuthServise
 {
-    Task SignUp(SignUp signUp);
-    Task<Client> Login(UserLogin user);
+    Task Registration(SignUp signUp);
+    Task<Client> Login(SignUp signUp);
 
 }

@@ -1,4 +1,5 @@
 using ExamBot.Domain;
+using ExamBot.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExamBot.Service.DataSource;
