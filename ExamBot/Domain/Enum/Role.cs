@@ -2,5 +2,7 @@ namespace ExamBot.Domain.Enum;
 
 public enum Role
 {
-    Student,Examiner
+    Student,
+    Examiner,
+    Admin
 }
