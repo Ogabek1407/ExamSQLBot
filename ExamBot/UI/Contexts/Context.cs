@@ -7,5 +7,5 @@ public class Context:ContextBase
 {
 
     public List<Task> TerminateSession { get; set; }
-    public Sesion Sesion { get; set; }
+    public Session Session { get; set; }
 }

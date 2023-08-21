@@ -10,7 +10,7 @@ public static class ContextExtensions
 {
     public static async Task Forward(this Context context,ControllerManager controllerManager)
     {
-        ControllerBase baseController =  controllerManager.GetControllerBySessionData(context.Sesion);
+        ControllerBase baseController =  controllerManager.GetControllerBySessionData(context.Session);
         await baseController.Handle(context);
     }
     
@@ -21,8 +21,8 @@ public static class ContextExtensions
     public static async Task SendTextMessage(this Context context, string text, IReplyMarkup? replyMarkup = null,
         ParseMode? parseMode = null)
     {
-        await TelegramBot.BotClient.SendTextMessageAsync(context.Sesion.TelegramChatId, text, replyMarkup: replyMarkup,
-            parseMode: parseMode);
+        //await Telegram..SendTextMessageAsync(context.Session.TelegramChatId, text, replyMarkup: replyMarkup,
+          //  parseMode: parseMode);
     }
 }
 
